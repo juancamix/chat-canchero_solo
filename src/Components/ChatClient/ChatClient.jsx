@@ -1,6 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import React, {useState, useEffect} from 'react'
 import io from 'socket.io-client'
+// import ChatBot from '../ChatBot/ChatBot'
+import './chatClient.css'
 
 
 const socket= io("https://chatcancheros.onrender.com")
@@ -10,9 +12,9 @@ export const ChatClient = () => {
     const {user} = useAuth0();
 
     const [message, setMessage] = useState('');
-    const [username, setUserName] = useState('Machine');
+    // const [username, setUserName] = useState('Machine');
     const [listMessages, setListMessages] = useState([{
-        body: "Welcome to the chat room"
+        body: "entraste en el chat"
       }]);
     
     const handleSubmit = (e) => {
@@ -38,28 +40,31 @@ export const ChatClient = () => {
       }, [listMessages])
     
   return (
-    <>
-
+    <div className='cart'>
       <div className='div-chat'>
+        <div className='chat-header'>Chat cancheros</div>
+        <span className="title">Chat-io</span>
         { listMessages.map( (message, idx) => (
-          <p key={message+idx}>{message.user}: {message.body}</p>
+          <p className='conver' key={message+idx}>{message.user}: {message.body}</p>
           ))
         }
       </div>              
     <form onSubmit={handleSubmit} className="form">
-      <span className="title">Chat-io</span>
-      <p className="description">Type your message.</p>
+      <p className="description"></p>
       <div className='div-type-chat'> 
         <input 
           value={message}
-          placeholder="Type your message"
+          placeholder="Escribe tu mensaje."
           onChange={ e => setMessage(e.target.value)}          
           type="text" name="text" id="chat-message"
           className="input-style" 
         />
-        <button type="submit">Send</button>
+        <div className='container-boton'>
+        <button className="submit">Send</button>
+        </div>
       </div>
-    </form>    
-    </>
+    </form>  
+    {/* <ChatBot/>   */}
+    </div>
   )
 }

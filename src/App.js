@@ -9,8 +9,10 @@ function App() {
   return (
     <div className="App">
       <LoginButton/>
+      <main>
       <Profile/>
       <ChatClient/>
+      </main>
     </div>
   );
 }
